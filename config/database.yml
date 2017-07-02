@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: met_office_development
+  pool: 5
+  username: met_office
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: met_office_test
+  pool: 5
+  username: met_office
+  password:
