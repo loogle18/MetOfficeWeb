@@ -1,4 +1,4 @@
 class Station < ActiveRecord::Base
-  has_many :climates
-  has_one :location
+  has_many :climates, dependent: :destroy
+  has_one :location, dependent: :destroy
 end

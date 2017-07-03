@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702134504) do
+ActiveRecord::Schema.define(version: 20170703210254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "climates", force: :cascade do |t|
     t.integer  "year"
-    t.decimal  "temp_max"
-    t.decimal  "temp_min"
-    t.decimal  "rain"
-    t.decimal  "af_days"
-    t.decimal  "sun_hours"
+    t.string   "temp_max"
+    t.string   "temp_min"
+    t.string   "rain"
+    t.string   "af_days"
+    t.string   "sun_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "station_id"
@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20170702134504) do
   add_index "climates", ["station_id"], name: "index_climates_on_station_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.decimal  "lat"
-    t.decimal  "lon"
-    t.decimal  "amsl"
+    t.string   "lat"
+    t.string   "lon"
+    t.string   "amsl"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "station_id"

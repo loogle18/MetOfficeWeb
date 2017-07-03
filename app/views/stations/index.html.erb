@@ -14,6 +14,9 @@
     <% @stations.each do |station| %>
       <tr>
         <td><%= station.name %></td>
+        <td><%= station.location.lat %></td>
+        <td><%= station.location.lon %></td>
+        <td><%= station.location.amsl %></td>
         <td><%= link_to 'Show', station %></td>
       </tr>
     <% end %>

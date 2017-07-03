@@ -5,4 +5,27 @@
   <%= @station.name %>
 </p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @station.climates.each do |climate| %>
+      <tr>
+        <td><%= climate.year %></td>
+        <td><%= climate.temp_max %></td>
+        <td><%= climate.temp_min %></td>
+        <td><%= climate.af_days %></td>
+        <td><%= climate.rain %></td>
+        <td><%= climate.sun_hours %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 <%= link_to 'Back', root_path %>
