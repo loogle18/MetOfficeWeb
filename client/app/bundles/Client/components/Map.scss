@@ -1,0 +1,18 @@
+.smallMapWrapper {
+  height: 200px;
+}
+
+.bigMapWrapper {
+  height: 400px;
+}
+
+.marker {
+  background: {
+    image: url('https://png.icons8.com/marker/office/60');
+    position: center;
+    repeat: no-repeat;
+    size: contain;
+  }
+  height: 40px;
+  width: 40px;
+}

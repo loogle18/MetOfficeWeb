@@ -12,6 +12,6 @@ class StationsController < ApplicationController
   private
 
   def load_and_build_stations
-    CreateStationsFromDataService.new.perform
+    CreateStationsFromDataService.new.perform unless  Station.count
   end
 end

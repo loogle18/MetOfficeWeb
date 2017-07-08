@@ -21,3 +21,5 @@ group :test do
   gem 'poltergeist', require: false
   gem 'mocha'
 end
+
+gem 'mini_racer', platforms: :ruby
