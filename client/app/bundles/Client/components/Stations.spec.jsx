@@ -2,7 +2,7 @@ import React from 'react';
 import { assert } from 'chai';
 import { shallow } from 'enzyme';
 
-import Stations from './Stations'
+import Stations from './Stations';
 
 describe('Stations', () => {
   const props = {

@@ -16,16 +16,20 @@ import GoogleMap from './GoogleMap'
 import css from './Map.scss'
 
 class Station extends Component {
+  getFormattedOutput(value, unit) {
+    return value == '---' ? value : `${value} ${unit}`
+  }
+
   renderClimates() {
     const climates = this.props.route.data.climates.map((climate) => {
       return(
         <TableRow key={climate.year}>
           <TableRowColumn>{climate.year}</TableRowColumn>
-          <TableRowColumn>{`${climate.temp_max} \xB0C`}</TableRowColumn>
-          <TableRowColumn>{`${climate.temp_min} \xB0C`}</TableRowColumn>
-          <TableRowColumn>{`${climate.rain} mm`}</TableRowColumn>
-          <TableRowColumn>{`${climate.af_days} days`}</TableRowColumn>
-          <TableRowColumn>{`${climate.sun_hours} hours`}</TableRowColumn>
+          <TableRowColumn>{this.getFormattedOutput(climate.temp_max, '\xB0C')}</TableRowColumn>
+          <TableRowColumn>{this.getFormattedOutput(climate.temp_min, '\xB0C')}</TableRowColumn>
+          <TableRowColumn>{this.getFormattedOutput(climate.rain, 'mm')}</TableRowColumn>
+          <TableRowColumn>{this.getFormattedOutput(climate.af_days, 'days')}</TableRowColumn>
+          <TableRowColumn>{this.getFormattedOutput(climate.sun_hours, 'hours')}</TableRowColumn>
         </TableRow>
       )
     })

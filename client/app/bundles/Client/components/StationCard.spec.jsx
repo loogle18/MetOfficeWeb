@@ -2,7 +2,7 @@ import React from 'react';
 import { assert } from 'chai';
 import { shallow } from 'enzyme';
 
-import StationCard from './StationCard'
+import StationCard from './StationCard';
 
 describe('StationCard', () => {
   it('renders StationCard components with GoogleStaticMap', () => {
