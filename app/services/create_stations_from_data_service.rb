@@ -1,29 +1,32 @@
 require 'open-uri'
 
 class CreateStationsFromDataService
+  URL_END = 'data.txt'
   NEW_LINE = "\n"
   DIGITS_PATTERN = /-?\d+.\d+/
   NAME_SEPARATOR_PATTERN = /(\/|  )/
-  BASE_URL = 'http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/'
-  STATIONS = %w(
-    aberporth armagh ballypatrick bradford braemar camborne cambridge cardiff chivenor cwmystwyth
-    dunstaffnage durham eastbourne eskdalemuir heathrow hurn lerwick leuchars lowestoft manston nairn
-    newtonrigg oxford paisley ringway rossonwye shawbury sheffield southampton stornoway suttonbonington
-    tiree valley waddington whitby wickairport yeovilton
-  )
+  LAT_SEPARATOR = 'Lat'
+  LAST_LINE_IDENTIFIER_BEFORE_YEARS = 'degC'
+
+  def initialize(base_url, stations)
+    @base_url = base_url
+    @stations = stations
+  end
 
   def perform
-    STATIONS.each do |station|
-      url = BASE_URL + station + 'data.txt'
+    @stations.each do |station|
+      url = @base_url + station + URL_END
 
       begin
         station_content = open(url) { |file| file.read }.split(NEW_LINE)
         build_data_from(station_content)
       rescue OpenURI::HTTPError
-        puts '-' * url.length
-        puts "There is no data for \"#{station.titleize}\" station or following url is broken:"
-        puts url
-        puts '-' * url.length
+        unless ENV['RAILS_ENV'] == 'test'
+          puts '-' * url.length
+          puts 'There is no data for \"#{station.titleize}\" station or following url is broken:'
+          puts url
+          puts '-' * url.length
+        end
       end
     end
   end
@@ -32,7 +35,7 @@ class CreateStationsFromDataService
 
   def build_data_from(data)
     station_name = data.first.split(NAME_SEPARATOR_PATTERN).first
-    location_data_lines = (data[1] + ' ' + data[2]).split('Lat').last
+    location_data_lines = (data[1] + ' ' + data[2]).split(LAT_SEPARATOR).last
 
     return if Station.find_by(name: station_name)
 
@@ -43,10 +46,9 @@ class CreateStationsFromDataService
 
   def create_climates_from(data)
     clean_data = []
-    last_line_identifier_before_years = 'degC'
 
     data.reverse.each do |line|
-      break if line.include?(last_line_identifier_before_years)
+      break if line.include?(LAST_LINE_IDENTIFIER_BEFORE_YEARS)
       clean_data << line
     end
 

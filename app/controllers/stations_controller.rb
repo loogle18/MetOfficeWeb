@@ -12,6 +12,9 @@ class StationsController < ApplicationController
   private
 
   def load_and_build_stations
-    CreateStationsFromDataService.new.perform unless  Station.count
+    CreateStationsFromDataService.new(
+      StationApiConstants::BASE_URL,
+      StationApiConstants::STATIONS
+    ).perform unless  Station.count
   end
 end

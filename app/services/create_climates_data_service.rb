@@ -65,7 +65,7 @@ class CreateClimatesDataService
 
     if filtered_data.any?
       filtered_data.map! do |value|
-        value.delete(EXCESS_SIGNS)
+        value.delete!(EXCESS_SIGNS)
         begin
           Float(value)
         rescue ArgumentError, TypeError
