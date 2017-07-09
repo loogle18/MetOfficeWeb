@@ -3,7 +3,6 @@ require 'open-uri'
 class CreateStationsFromDataService
   URL_END = 'data.txt'
   NEW_LINE = "\n"
-  DIGITS_PATTERN = /-?\d+.\d+/
   NAME_SEPARATOR_PATTERN = /(\/|  )/
   LAT_SEPARATOR = 'Lat'
   LAST_LINE_IDENTIFIER_BEFORE_YEARS = 'degC'
@@ -41,7 +40,7 @@ class CreateStationsFromDataService
 
     station = Station.create!(name: station_name)
     station.climates = create_climates_from(data)
-    station.location = create_location_from(location_data_lines)
+    station.location = CreateLocationFromDataService.new(location_data_lines).perform
   end
 
   def create_climates_from(data)
@@ -53,12 +52,5 @@ class CreateStationsFromDataService
     end
 
     CreateClimatesDataService.new(clean_data).perform
-  end
-
-  def create_location_from(data)
-    location_values = data.scan(DIGITS_PATTERN)
-    lat, lon, amsl = location_values[0], location_values[1], location_values[2]
-
-    Location.create!(lat: lat, lon: lon, amsl: amsl)
   end
 end
