@@ -4,7 +4,8 @@
   "private": true,
   "engines": {
     "node": "6.9.0",
-    "npm": "4.1.1"
+    "npm": "4.1.1",
+    "yarn": "^0.21"
   },
   "scripts": {
     "postinstall": "cd client && yarn install",
@@ -12,12 +13,12 @@
     "test": "rspec"
   },
   "devDependencies": {
-    "node-sass": "^4.5.3",
     "react-google-maps": "^7.1.0",
     "sass-loader": "^6.0.6",
     "webpack": "^3.1.0"
   },
   "dependencies": {
+    "node-sass": "^4.5.3",
     "react-google-static-map": "^0.1.0"
   }
 }
