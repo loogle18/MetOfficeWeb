@@ -3,7 +3,7 @@ json.location do
   json.extract! @station.location, :lat, :lon, :amsl
 end
 json.climates do
-  json.array!(@station.climates) do |climate|
+  json.array!(@station.climates.ordered_by_year) do |climate|
     json.extract! climate, :year, :temp_max, :temp_min, :rain, :af_days, :sun_hours
   end
 end

@@ -2,7 +2,7 @@ class StationsController < ApplicationController
   before_action :load_and_build_stations, only: :index
 
   def index
-    @stations = Station.all
+    @stations = Station.ordered_by_name
   end
 
   def show
@@ -15,6 +15,6 @@ class StationsController < ApplicationController
     CreateStationsFromDataService.new(
       StationApiConstants::BASE_URL,
       StationApiConstants::STATIONS
-    ).perform unless  Station.count
+    ).perform unless Station.exists?
   end
 end
