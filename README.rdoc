@@ -1,2 +1,0 @@
-== README
-Web client for uk climate station data.

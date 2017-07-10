@@ -16,10 +16,6 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'capybara', require: false
   gem 'rspec-rails', '~> 3.5'
-  gem 'poltergeist', require: false
   gem 'mocha'
 end
-
-gem 'mini_racer', platforms: :ruby
