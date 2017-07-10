@@ -2,6 +2,7 @@ class CreateClimatesDataService
   NO_DATA_SIGN = '---'
   EXCESS_SIGNS = '#*'
   ZERO_FLOAT_PATTERN = /\A0.0+/
+  DIGITS_PATTERN = /\d/
 
   attr_reader :data
 
@@ -40,7 +41,11 @@ class CreateClimatesDataService
 
     data.each do |line|
       values = line.split(' ')
-      if year_data = data_per_year[values.first]
+      year = values.first
+
+      next unless year.scan(DIGITS_PATTERN).any?
+
+      if year_data = data_per_year[year]
         year_data[:temp_max_array] << values[2]
         year_data[:temp_min_array] << values[3]
         year_data[:af_days_array] << values[4]

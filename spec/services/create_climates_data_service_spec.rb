@@ -11,6 +11,16 @@ describe CreateClimatesDataService do
     expect(Climate.count).to eq(data.length)
   end
 
+  it 'does not create climate instances for invalid data' do
+    data = [
+      'Some   invalid   data    11.8       0   105.4   171.6#  Provisional',
+      '2016  12   10.0     5.4       1    54.2    46.5*'
+    ]
+    climates = described_class.new(data).perform
+
+    expect(Climate.count).to eq(1)
+  end
+
   it 'removes excess symbols from data' do
     data = ['2017   6   17.8    11.8       0   105.4   171.6*#']
     climates = described_class.new(data).perform
