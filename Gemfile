@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
-ruby '2.4.0'
+ruby '2.4.2'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.1.4'
 gem 'jbuilder'
 
 gem 'pg'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'react_on_rails', '~> 6'
+gem 'webpacker', '~> 3.0'
 
 group :development do
   gem 'web-console', '~> 2.0'
